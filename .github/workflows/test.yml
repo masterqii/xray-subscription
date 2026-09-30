@@ -1,0 +1,27 @@
+name: Test
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install PyYAML==6.0.2
+      - run: python -m unittest discover -s tests -v
+      - run: python -m compileall -q src deploy.py
+      - run: sudo apt-get update && sudo apt-get install -y nginx openssl
+      - name: Verify pinned Xray release and generated configs
+        env:
+          XRAY_TEST_BIN: /tmp/xray-test
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from deploy import fetch_xray
+          fetch_xray('26.3.27', '23cd9af937744d97776ee35ecad4972cf4b2109d1e0fe6be9930467608f7c8ae', Path('/tmp/xray-test'))
+          PY
+          python -m unittest discover -s tests -v
+          sudo env XRAY_TEST_BIN=/tmp/xray-test python3 tests/check_linux.py

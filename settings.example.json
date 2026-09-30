@@ -1,0 +1,9 @@
+{
+  "domain": "vpn.example.com",
+  "email": "you@example.com",
+  "server": "203.0.113.10",
+  "name": "My VPS",
+  "sni": "www.cloudflare.com",
+  "vpn_port": 443,
+  "https_port": 8443
+}

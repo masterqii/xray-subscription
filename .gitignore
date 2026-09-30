@@ -1,0 +1,13 @@
+private/
+build/
+.venv/
+__pycache__/
+*.pyc
+*.pem
+*.key
+*.sqlite*
+*.log
+.env*
+settings.json
+state.json
+delivery.json

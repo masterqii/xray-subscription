@@ -6,3 +6,5 @@ Never commit real settings, private keys, client UUIDs, subscription tokens or U
 Use documentation IP ranges and example.com in fixtures. Generated files belong outside Git.
 Test pure renderers and provisioning failure paths before publishing changes.
 Do not run provisioning on an existing production host. It targets a fresh Ubuntu 24.04 server.
+
+Read CONTEXT.md before continuing work. Before push, update its sanitized goals, changes and verification boundaries; never include personal server records or credentials.
